@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Course {
     private String name;
-    private String subject;
+    private String topic;
     private int credit;
 
     public Course(String name, String topic, int credit){
@@ -16,7 +16,7 @@ public class Course {
 
     public String getName(){return name;}
     public int getCredit(){return credit;}
-    public String getSubject(){return subject;}
+    public String getTopic(){return topic;}
 
     public void setName(String name){
         if(name == null || name.isEmpty()){
@@ -27,7 +27,6 @@ public class Course {
     }
 
     public void setTopic(String topic){
-        
     }
 
     public void setCredit(int credit){

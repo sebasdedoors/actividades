@@ -3,20 +3,20 @@ package poom.actividad4.models;
 public class Student {
     private String name;
     private int age;
-    private int toition;
+    private int tuition;
     private String course;
 
 
-    public Student(String name, int age, int toition, String course) {
+    public Student(String name, int age, int tuition, String course) {
         setName(name);
         setAge(age);
-        setToition(toition);
+        setToition(tuition);
         setCourse(course);
     }
 
     public String getName() {return name;}
     public int getAge() {return age;}
-    public int getToition() {return toition;}
+    public int getToition() {return tuition;}
     public String getCourse() {return course;}
 
     public void setName(String name){
@@ -31,11 +31,11 @@ public class Student {
         }
         this.age = age;
     }
-    public void setToition(int toition){
-        if (toition < 0){
+    public void setToition(int tuition){
+        if (tuition < 0){
             throw new IllegalArgumentException("La matrícula no puede ser negativa.");
         }
-        this.toition = toition;
+        this.tuition = tuition;
     }
     public void setCourse(String course){
         if(course == null || course.trim().isEmpty() || course.matches(".*\\d.*")){

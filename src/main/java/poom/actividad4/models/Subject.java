@@ -22,12 +22,6 @@ public class Subject {
     }
 
 public Subject(String name, int credits, String ID, String course, int hours, Teacher teacher){
-    this.name = name;
-    this.credits = credits;
-    this.ID = ID;
-    this.hours = hours;
-    this.course = course;
-    this.teacher = teacher;
     setName(name);
     setCredits(credits);
     setID(ID);
@@ -71,6 +65,7 @@ public void setID(String ID){
     if (ID == null){
         throw new IllegalArgumentException("El esapcio no puede estar vacio. ");
     }
+    this.ID = ID;
 }
 public void setHours(int hours){
     if (hours < 0){

@@ -17,6 +17,7 @@ public class CLI {
     private Scanner scanner;
     private List<Student> students;
     private List<Teacher> teachers;
+    private List<Course> courses;  
     private Lang lang;
 
     public CLI() {
@@ -48,7 +49,7 @@ public class CLI {
                 lang = new Eng();
                 break;
             case 3:
-                lang = new De();
+                lang = new Deu();
                 break;
             case 4:
                 lang = new Ita();
@@ -108,6 +109,114 @@ public class CLI {
                     default:
                         System.out.println(lang.INVALID);
                 }
+            }
+        }
+
+        private void showStudents() {
+            if (students.isEmpty()) {
+                System.out.println("No hay estudiantes registrados.");
+            } else {
+                for (Student student : students) {
+                    System.out.println(" - " + student.getName());
+                }
+            }
+        }
+
+        private void showCourses() {
+            if (courses.isEmpty()) {
+                System.out.println("No hay cursos registrados.");
+            } else {
+                for (Course course : courses) {
+                    System.out.println(" - " + course.getName());
+                }
+            }
+        }
+
+        private void showTeachers() {
+            if (teachers.isEmpty()) {
+                System.out.println("No hay profesores registrados.");
+            } else {
+                for (Teacher teacher : teachers) {
+                    System.out.println(" - " + teacher.getName());
+                }
+            }
+        }
+
+        private void addStudent() {
+            System.out.println("Ingrese el nombre del estudiante:");
+            String name = scanner.nextLine();
+            students.add(new Student(name));
+        }
+
+        private void addCourse() {
+            System.out.println("Ingrese el nombre del curso:");
+            String name = scanner.nextLine();
+            courses.add(new Course(name));
+        }
+
+        private void addTeacher() {
+            System.out.println("Ingrese el nombre del profesor:");
+            String name = scanner.nextLine();
+            teachers.add(new Teacher(name));
+        }
+
+        private void assignTeacherToCourse() {
+            System.out.println("Seleccione un curso:");
+            showCourses();
+            int courseIndex = scanner.nextInt();
+            scanner.nextLine();
+            Course course = courses.get(courseIndex);
+            
+            System.out.println("Seleccione un profesor:");
+            showTeachers();
+            int teacherIndex = scanner.nextInt();
+            scanner.nextLine();
+            Teacher teacher = teachers.get(teacherIndex);
+            
+            course.setTeacher(teacher);
+        }
+
+        private void assignStudentToCourse() {
+            System.out.println("Seleccione un curso:");
+            showCourses();
+            int courseIndex = scanner.nextInt();
+            scanner.nextLine();
+            Course course = courses.get(courseIndex);
+            
+            System.out.println("Seleccione un estudiante:");
+            showStudents();
+            int studentIndex = scanner.nextInt();
+            scanner.nextLine();
+            Student student = students.get(studentIndex);
+            
+            course.addStudent(student);
+        }
+
+        private void showStudentsInCourse() {
+            System.out.println("Seleccione un curso:");
+            showCourses();
+            int courseIndex = scanner.nextInt();
+            scanner.nextLine();
+            Course course = courses.get(courseIndex);
+            
+            System.out.println("Estudiantes en el curso " + course.getName() + ":");
+            for (Student student : course.getStudents()) {
+                System.out.println(" - " + student.getName());
+            }
+        }
+
+        private void showTeachersInCourse() {
+            System.out.println("Seleccione un curso:");
+            showCourses();
+            int courseIndex = scanner.nextInt();
+            scanner.nextLine();
+            Course course = courses.get(courseIndex);
+            
+            Teacher teacher = course.getTeacher();
+            if (teacher == null) {
+                System.out.println("No hay profesor asignado.");
+            } else {
+                System.out.println("Profesor del curso " + course.getName() + ": " + teacher.getName());
             }
         }
 }

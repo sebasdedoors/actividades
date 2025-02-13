@@ -188,10 +188,34 @@ public class SchoolManager {
         System.out.println("La materia " + subject.getName() + " se ha asignado al profesor " + teacher.getName());
     }
 
-    public static void calculateHoursAndCredits(Course course){}
+    public static void calculateHoursAndCredits(Course course){
+        List<Subject> subjects = courseMap.get(course);
+        int totalHours = 0;
+        int totalCredits = 0;
 
-    public static void calculateSalary(Teacher teacher){
-        
+        for(Subject subject : subjects){
+            totalHours += subject.getHours();
+            totalCredits += subject.getCredits();
+        }
+        System.out.println("El curso " + course.getName() + " tiene un total de " + totalHours + " horas y " + totalCredits + " créditos.");
+    }
+
+    public void calculateSalary(Teacher teacher){
+        double salary = teacher.getSalary();
+        double totalSalary = 0;
+        if(courseTeacherMap.size() == 1){
+            totalSalary = salary;
+        }
+        if(courseTeacherMap.size() == 2){
+            totalSalary = salary + (salary * 0.25);
+        }
+        if(courseTeacherMap.size() == 3){
+            totalSalary = salary + (salary * 0.5);
+        }
+        if(courseTeacherMap.size() == 4){
+            totalSalary = salary + (salary * 0.75);
+        }
+        teacher.setPayroll(totalSalary);;
     }
 
 }

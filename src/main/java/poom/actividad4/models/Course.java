@@ -1,23 +1,25 @@
 package poom.actividad4.models;
 
-import poom.actividad4.models.Teacher;
-
 public class Course {
     private String name;
     private String topic;
     private int credit;
     private Teacher teacher;
+    private Student student;
 
-    public Course(String name, String topic, int credit){
+    public Course(String name, String topic, int credit, Teacher teacher, Student student){
         setName(name);
         setTopic(topic);
         setCredit(credit);
+        setTeacher(teacher);
+        setStudent(student);
     }
 
     public String getName(){return name;}
     public int getCredit(){return credit;}
     public String getTopic(){return topic;}
     public Teacher getTeacher(){return teacher;}
+    public Student getStudent(){return student;}
 
     public void setName(String name){
         if(name == null || name.isEmpty()){
@@ -48,6 +50,14 @@ public class Course {
             throw new IllegalArgumentException("El nombre del profesor no puede estar vacio.");
         }else{
             this.teacher = teacher;
+        }
+    }
+
+    public void setStudent(Student student){
+        if(student == null){
+            throw new IllegalArgumentException("El nombre del estudiante no puede estar vacio.");
+        }else{
+            this.student = student;
         }
     }
 

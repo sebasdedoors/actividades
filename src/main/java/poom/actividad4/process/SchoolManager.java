@@ -130,7 +130,19 @@ public class SchoolManager {
         }
     }
 
-    public static void showStudentInCourse(Course course){}
+    public static void showStudentInCourse(Course course){
+        Student student = course.getStudent();
+
+        if(student == null){
+            System.out.println("No hay alumnos asignados a " + course.getName());
+            return;
+        }
+
+        System.out.println("\nAlumnos asignados al curoso " + course.getName() + ":");
+        for(Course studentCourse : studentCourseMap.keySet()){
+            System.out.println("- " + studentCourse.getName());
+        }
+    }
 
     public static void showTeacherInCourse(Course course){
         Teacher teachers = course.getTeacher();
@@ -178,6 +190,8 @@ public class SchoolManager {
 
     public static void calculateHoursAndCredits(Course course){}
 
-    public static void calculateSalary(Teacher teacher){}
+    public static void calculateSalary(Teacher teacher){
+        
+    }
 
 }

@@ -12,18 +12,57 @@ import poom.actividad4.models.Student;
 import poom.actividad4.models.Teacher;
 import poom.actividad4.models.Subject;
 
+
 public class CLI {
 
-    private Scanner scanner;
+
+private Scanner scanner;
     private List<Student> students;
     private List<Teacher> teachers;
-    private List<Course> courses;  
+
+    private String student;
     private Lang lang;
 
     public CLI() {
         scanner = new Scanner(System.in);
         selectLanguage();
     }       
+    public static void main(String[] args) {
+        Student student1 = new Student("Juan Perez López", 21,30211001,null);
+        Student student2 = new Student("Clara Fernández Álvarez", 21, 30211002, null);
+        Student student3 = new Student("María González Ramírez", 19, 30211003,null);
+        Student student4 = new Student("Carlos Herrera Sánchez", 22, 30211004,null);
+        Student student5 = new Student("Ana Martínez Torres", 20, 30211005,null);
+        Student student6 = new Student("Sofía Castro Morales", 18, 30211006,null);
+        Student student7 = new Student("Miguel Rojas Ortega", 25, 30211007,null);
+        Student student8 = new Student("Daniela Chávez Flores", 21, 30211008,null);
+        Student student9 = new Student("Andrés Jiménez Navarro", 19, 30211009,null);
+        Student student10 = new Student("Patricia Salazar Mendoza", 24, 30211010,null);
+        Student student11 = new Student("Ricardo Ortega Villalobos", 22, 30211011,null);
+        Student student12 = new Student("Gabriela Suárez Pineda", 20, 30211012,null);
+        Student student13 = new Student("Fernando López Castillo", 23, 30211013, null);
+        Student student14 = new Student("Laura Méndez Ruiz", 19, 30211014, null);
+        Student student15 = new Student("Diego Ramírez Navas", 24, 30211015, null);
+        Student student16 = new Student("Valeria Torres Cervantes", 22, 30211016, null);
+        Student student17 = new Student("Alejandro Vega Pacheco", 21, 30211017, null);
+        Student student18 = new Student("Camila Reyes Silva", 18, 30211018, null);
+        Student student19 = new Student("Eduardo Álvarez Fuentes", 25, 30211019, null);
+        Student student20 = new Student("Carolina Herrera Domínguez", 20, 30211020, null);
+        Student student21 = new Student("Javier Núñez Ortega", 22, 30211021, null);
+        Student student22 = new Student("Natalia Rivas Camacho", 19, 30211022, null);
+        Student student23 = new Student( "Roberto Fernández Jiménez", 20, 30211023, null);
+
+        Subject subject1 = new Subject("POO", 30, "3456", null, 80,null );
+        Subject subject2 = new Subject(null, 0, null, null, 0, null);
+        Subject subject3 = new Subject(null, 0, null, null, 0, null);
+
+        Course course = new Course(null, null, 0);
+
+        Teacher teacher = new Teacher(null, 0, 0);
+
+
+    
+
 
     public void selectLanguage() {
         System.out.println("+------------------------------------------------------------------------------------------------------------------+");
@@ -111,113 +150,6 @@ public class CLI {
                 }
             }
         }
-
-        private void showStudents() {
-            if (students.isEmpty()) {
-                System.out.println("No hay estudiantes registrados.");
-            } else {
-                for (Student student : students) {
-                    System.out.println(" - " + student.getName());
-                }
-            }
-        }
-
-        private void showCourses() {
-            if (courses.isEmpty()) {
-                System.out.println("No hay cursos registrados.");
-            } else {
-                for (Course course : courses) {
-                    System.out.println(" - " + course.getName());
-                }
-            }
-        }
-
-        private void showTeachers() {
-            if (teachers.isEmpty()) {
-                System.out.println("No hay profesores registrados.");
-            } else {
-                for (Teacher teacher : teachers) {
-                    System.out.println(" - " + teacher.getName());
-                }
-            }
-        }
-
-        private void addStudent() {
-            System.out.println("Ingrese el nombre del estudiante:");
-            String name = scanner.nextLine();
-            students.add(new Student(name));
-        }
-
-        private void addCourse() {
-            System.out.println("Ingrese el nombre del curso:");
-            String name = scanner.nextLine();
-            courses.add(new Course(name));
-        }
-
-        private void addTeacher() {
-            System.out.println("Ingrese el nombre del profesor:");
-            String name = scanner.nextLine();
-            teachers.add(new Teacher(name));
-        }
-
-        private void assignTeacherToCourse() {
-            System.out.println("Seleccione un curso:");
-            showCourses();
-            int courseIndex = scanner.nextInt();
-            scanner.nextLine();
-            Course course = courses.get(courseIndex);
-            
-            System.out.println("Seleccione un profesor:");
-            showTeachers();
-            int teacherIndex = scanner.nextInt();
-            scanner.nextLine();
-            Teacher teacher = teachers.get(teacherIndex);
-            
-            course.setTeacher(teacher);
-        }
-
-        private void assignStudentToCourse() {
-            System.out.println("Seleccione un curso:");
-            showCourses();
-            int courseIndex = scanner.nextInt();
-            scanner.nextLine();
-            Course course = courses.get(courseIndex);
-            
-            System.out.println("Seleccione un estudiante:");
-            showStudents();
-            int studentIndex = scanner.nextInt();
-            scanner.nextLine();
-            Student student = students.get(studentIndex);
-            
-            course.addStudent(student);
-        }
-
-        private void showStudentsInCourse() {
-            System.out.println("Seleccione un curso:");
-            showCourses();
-            int courseIndex = scanner.nextInt();
-            scanner.nextLine();
-            Course course = courses.get(courseIndex);
-            
-            System.out.println("Estudiantes en el curso " + course.getName() + ":");
-            for (Student student : course.getStudents()) {
-                System.out.println(" - " + student.getName());
-            }
-        }
-
-        private void showTeachersInCourse() {
-            System.out.println("Seleccione un curso:");
-            showCourses();
-            int courseIndex = scanner.nextInt();
-            scanner.nextLine();
-            Course course = courses.get(courseIndex);
-            
-            Teacher teacher = course.getTeacher();
-            if (teacher == null) {
-                System.out.println("No hay profesor asignado.");
-            } else {
-                System.out.println("Profesor del curso " + course.getName() + ": " + teacher.getName());
-            }
-        }
+        private void Students
 }
 

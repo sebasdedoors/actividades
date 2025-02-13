@@ -56,8 +56,7 @@ public class SchoolManager {
             return;
         }
         Teacher assignedTeacher = subject.getTeacher();
-        if(assignedTeacher == null){
-            assignedTeacher = findAvailableTeacher();
+        if(teacherMap.containsKey(assignedTeacher) == false){
 
             if(assignedTeacher == null){
                 System.out.println("Error: No hay profesores disponibles para asignar la materia " + subject.getName());
@@ -71,7 +70,7 @@ public class SchoolManager {
             System.out.println("La materia " + subject.getName() + " ya tiene a un profesor asignado: " + assignedTeacher.getName());
         }
         courseMap.get(course).add(subject);
-        course.addTeacher(assignedTeacher);
+        course.setTeacher(assignedTeacher);
         System.out.println("La mareria " + subject.getName() + " se ha agregado al curso " + course.getName() + " con exito.");
     } 
 
@@ -131,20 +130,18 @@ public class SchoolManager {
         }
     }
 
-    private static Teacher findAvailableTeacher(){}
-
     public static void showStudentInCourse(Course course){}
 
     public static void showTeacherInCourse(Course course){
-        List<Teacher> teachers = course.getTeacher();
+        Teacher teachers = course.getTeacher();
 
-        if(teachers == null || teachers.isEmpty()){
+        if(teachers == null){
             System.out.println("NO hay profesores asignados a " + course.getName());
             return;
         }
 
         System.out.println("\nProfesores asignados al curso " + course.getName() + ":");
-        for(Teacher teacher : teachers){
+        for(Teacher teacher : teacherMap.keySet()){
             System.out.println("- " + teacher.getName());
         }
     }

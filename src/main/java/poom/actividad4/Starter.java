@@ -1,7 +1,11 @@
 package poom.actividad4;
 
-public class Starter {
-    public static void main(String[] args){
+import poom.actividad4.ui.CLI;
 
+
+public class Starter {
+     public static void main(String[] args) {
+        CLI cli = new CLI();
+        cli.runApp();
     }
 }

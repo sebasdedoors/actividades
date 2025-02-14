@@ -38,7 +38,7 @@ public class Student {
         this.tuition = tuition;
     }
     public void setCourse(String course){
-        if(course == null || course.trim().isEmpty() || course.matches(".*\\d.*")){
+        if(course == null){
             throw new IllegalArgumentException("El curso no puede contener números.");
         }
         this.course = course;

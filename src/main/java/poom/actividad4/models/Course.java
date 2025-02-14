@@ -1,15 +1,18 @@
 package poom.actividad4.models;
 
+import java.util.List;
+
 public class Course {
     private String name;
-    private String topic;
+    private List<Subject> subjects;
     private int credit;
     private Teacher teacher;
     private Student student;
+    private Subject subject;
 
-    public Course(String name, String topic, int credit, Teacher teacher, Student student){
+    public Course(String name, List<Subject> subject, int credit, Teacher teacher, Student student){
         setName(name);
-        setTopic(topic);
+        setSubject(subjects);
         setCredit(credit);
         setTeacher(teacher);
         setStudent(student);
@@ -17,7 +20,7 @@ public class Course {
 
     public String getName(){return name;}
     public int getCredit(){return credit;}
-    public String getTopic(){return topic;}
+    public List<Subject> getSubject(){return subjects;}
     public Teacher getTeacher(){return teacher;}
     public Student getStudent(){return student;}
 
@@ -29,11 +32,11 @@ public class Course {
         }
     }
 
-    public void setTopic(String topic){
-        if(topic == null || topic.isEmpty()){
+    public void setSubject(List<Subject> subjects){
+        if(subject == null){
             throw new IllegalArgumentException("El tema no puede quedar vacio.");
         }else{
-            this.topic = topic;
+            subjects.add(subject);
         }
     }
 

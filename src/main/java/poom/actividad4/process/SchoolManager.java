@@ -17,20 +17,25 @@ public class SchoolManager {
     public static Map<Course, List<Student>> studentCourseMap =new HashMap<>();
     public static Map<Subject, List<Subject>> subjectMap = new HashMap<>();
     public static List<Subject> subjectList = new ArrayList<>();
+    public static Map<Student, List<Student>> studentMap = new HashMap<>();
 
     public static void enrollTeacher(Teacher teacher){
+        teacher = new Teacher(null, 0, 0);
         teacherMap.put(teacher, new ArrayList<>());
     }
 
     public static void enrollCourse(Course course){
+        course = new Course(null, subjectList, 0, null, null);
         courseMap.put(course, new ArrayList<>());
     }
 
     public static void enrollStudent(Student student){
-        studentCourseMap.putIfAbsent(null, new ArrayList<>());
+        student = new Student(null, 0, 0, null);
+        studentMap.put(student, new ArrayList<>());
     } 
 
     public static void enrollSubject(Subject subject){
+        subject = new Subject(null, 0, null, null, 0, null);
         subjectMap.put(subject, new ArrayList<>());
     }
 
@@ -138,7 +143,7 @@ public class SchoolManager {
             return;
         }
 
-        System.out.println("\nAlumnos asignados al curoso " + course.getName() + ":");
+        System.out.println("\nAlumnos asignados al curso " + course.getName() + ":");
         for(Course studentCourse : studentCourseMap.keySet()){
             System.out.println("- " + studentCourse.getName());
         }
@@ -215,7 +220,22 @@ public class SchoolManager {
         if(courseTeacherMap.size() == 4){
             totalSalary = salary + (salary * 0.75);
         }
-        teacher.setPayroll(totalSalary);;
+        teacher.setPayroll(totalSalary);
+    }
+
+    public void showSubjectsInCourse(Subject subject, Course course){
+        List<Subject> subjects = course.getSubject();
+
+        if(subjects == null){
+            System.out.println("No hay materias asignadas a " + course.getName());
+            return;
+        }
+
+        System.out.println("\nMaterias asignados al curso: " + course.getName() + ":");
+        for(Subject subjectCourse : subjectMap.keySet()){
+            System.out.println("- " + subjectCourse.getName());
+        }
+        return;
     }
 
 }

@@ -142,6 +142,18 @@ public class CLI {
     private void showStudentsInCourse(){}
 
     private void showTeachersInCourse(){}
+
+    private void addSubject(){}
+
+    private void assignSubjectToCourse(){}
+
+    private void showSubjectsInTeacher(){}
+
+    private void assignSubjectToTeacher(){}
+
+    private void calculateHoursAndCredits(){}
+
+    private void calculateSalary(){}
 }
 
 

@@ -30,7 +30,7 @@ public class SchoolManager {
         studentCourseMap.putIfAbsent(null, new ArrayList<>());
     } 
 
-    public static void enrollTopic(Subject subject){
+    public static void enrollSubject(Subject subject){
         subjectMap.put(subject, new ArrayList<>());
     }
 

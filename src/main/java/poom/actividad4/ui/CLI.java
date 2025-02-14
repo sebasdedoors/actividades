@@ -75,9 +75,9 @@ public class CLI {
     }
 
     private void showMenu(){
-        System.out.println("+------------------------------+");
+        System.out.println("+------------------------------------------+");
         System.out.println(lang.MENU);
-        System.out.println("+------------------------------+");
+        System.out.println("+------------------------------------------+");
     }
 
     public void runApp(){
@@ -91,22 +91,22 @@ public class CLI {
                     addStudent(); 
                     break;
                 case 2:
-                    showStudents(); 
-                    break;
-                case 3:
                     addTeacher(); 
                     break;
-                case 4:
-                    showTeachers(); 
-                    break;
-                case 5:
+                case 3:
                     addSubject(); 
                     break;
+                case 4:
+                    addCourse(); 
+                    break;
+                case 5:
+                    showStudents();
+                    break;
                 case 6:
-                    showSubjects(); 
+                    showTeachers(); 
                     break;
                 case 7:
-                    addCourse(); 
+                    showSubjects(); 
                     break;
                 case 8:
                     showCourses(); 
@@ -148,19 +148,19 @@ public class CLI {
     }
 
     /*addSubject, assignSubjectToCourse, showSubjectsInTeacher, assignSubjectToTeacher, calculateHoursAndCredits, calculateSalary */
-    private void showStudents(){
+    private static void showStudents(){
         for(Student student : students){
             System.out.println("- " + student.getName() + ", Edad: " + student.getAge() + ", Curso: " + student.getCourse() + ", Matricula: " + student.getToition() + ".");
         }
     }
 
-    private void showCourses(){
+    private static void showCourses(){
         for(Course course : courseMap.keySet()){
             System.out.println("- " + course.getName() + ", Materias: " + course.getSubject() + ", Creditos: " + course.getCredit());
         }
     }
 
-    private void showTeachers(){
+    private static void showTeachers(){
         for(Teacher teacher : teacherMap.keySet()){
             System.out.println("- " + teacher.getName() + ", Materias impartidas: " + teacher.getSubjects() + ", Salario: " + teacher.getSalary() + ", Nomina: " + teacher.getPayroll());
         }
@@ -168,81 +168,80 @@ public class CLI {
 
     private void addStudent(){
         try{
-            System.out.println("Ingrese el nombre completo del estudiante:");
+            System.out.println(lang.NAME);
             String name = scanner.nextLine();
             student.setName(name);
-            System.out.println("Ingrese la edad del estudiante: ");
+            System.out.println(lang.AGE);
             int age = scanner.nextInt();
             student.setAge(age);
-            System.out.println("Ingrese la matricula el estudiante: ");
+            System.out.println(lang.TUITION);
             int tuition = scanner.nextInt();
             student.setToition(tuition);
-            System.out.println("Escriba el curso del estudiante: ");
+            System.out.println(lang.COURSENAME);
             String courseName = scanner.nextLine();
             student.setCourse(courseName);
-
             schoolManager.enrollStudent(student);
-            System.out.println("Producto agregado exitosamente");
+            System.out.println(lang.SUCCESS);
         }catch(Exception e){
-            System.out.println("Error al agregar el producto: " + e.getMessage());
+            System.out.println(lang.ERROR + e.getMessage());
         }
     }
     
     private void addCourse(){
         try{
-            System.out.println("Ingrese el nombre del curso:");
+            System.out.println(lang.COURSENAME);
             String name = scanner.nextLine();
             course.setName(name);
-            System.out.println("¿Cúantas materias tendrá el curso?");
+            System.out.println(lang.NUMSUB);
             int numsub = scanner.nextInt();
             if(numsub < 3){
-                System.out.println("El curso debe de tener al menos 3 materias");
+                System.out.println(lang.NUMNEED_M);
                 return;
             }
             for(int i = 1; i < numsub; i++){
                 String newSubject = scanner.nextLine();
                 subjects.add(newSubject);
             }
-            System.out.println("Ingrese la cantidad de creditos: ");
+            System.out.println(lang.CREDITS);
             int credit = scanner.nextInt();
             course.setCredit(credit);
 
-            System.out.println("El curso se agrego con exito.");
+            System.out.println(lang.SUCCESS_COURSE);
             schoolManager.enrollCourse(course);
         }catch(Exception e){
-            System.out.println("Erroral agregar el curso: " + e.getMessage());
+            System.out.println(lang.ERROR_COURSE + e.getMessage());
         }
     }
 
     private void addTeacher(){
         try{
-            System.out.println("Ingrese el nombre del profesor:");
+            System.out.println(lang.NAME_PROFESSOR);
             String name = scanner.nextLine();
             teacher.setName(name);
-            System.out.println("Ingrese el salario base del profesor:");
+            System.out.println(lang.SALARY_PROFESSOR);
             double salary = scanner.nextDouble();
             teacher.setSalary(salary);
 
             schoolManager.enrollTeacher(teacher);
-            System.out.println("El maestro se agrego con exito.");
+            System.out.println(lang.SUCCESS_PROFESSOR);
         }catch(Exception e){
-            System.out.println("Error al agregar al profesor: " + e.getMessage());
+            System.out.println(lang.ERROR_PROFESSOR + e.getMessage());
         }
     }
 
     private void assignTeacherToCourse(){
-        System.out.println("Ingrese el nombre del curso:");
+        System.out.println(lang.COURSENAME);
         String curso = scanner.nextLine();
         if(schoolManager.courseMap.containsValue(curso) == false){
-            System.out.println("El curso no ha sido encontrado, primero cree el curso por favor.");
+            System.out.println(lang.COURSE_NOT_FOUND);
             return;
         } 
-        System.out.println("Ingrese el nombre del profesor:");
+        System.out.println(lang.NAME_PROFESSOR);
         String teacherName = scanner.nextLine();
         Teacher teacher = schoolManager.courseTeacherMap.get(teacherName);
         
         if(schoolManager.courseTeacherMap.containsValue(teacher)){
-        System.out.println("Este maestro ya esta asignado a este curso.");
+        System.out.println(lang.ASSIGN_ALREADY_PROFESSOR);
         return;
         }
         schoolManager.assignTeacher(course, teacher);;
@@ -250,7 +249,7 @@ public class CLI {
 
     private void assignStudentToCourse(){
         try{
-            System.out.println("Ingrese el nombre del curso:");
+            System.out.println(lang.COURSENAME);
             String courseName = scanner.nextLine();
             Course course = null;
             for (Course c : schoolManager.courseMap.keySet()) {
@@ -260,129 +259,129 @@ public class CLI {
                 }
             }
             if(course == null){
-                System.out.println("El curso no ha sido creado aún, por favor creelo primero.");
+                System.out.println(lang.COURSE_NOT_FOUND);
                 return;
             }
-            System.out.println("Ingrese el nombre del estudiannte:");
+            System.out.println(lang.NAME);
             String studentName = scanner.nextLine();
             List<Student> students = schoolManager.studentMap.get(studentName);
             if(students == null || students.isEmpty()){
-                System.out.println("El estudiante no ha sido agregado aun, agreguelo por favor.");
+                System.out.println(lang.STUDENT_NOT_FOUND);
                 return;
             }
             Student student = students.get(0); // Assuming the first student in the list
             if(schoolManager.studentCourseMap.containsValue(student)){
-                System.out.println("El estudiante ya esta asignado a este curso.");
+                System.out.println(lang.ASSIGN_ALREADY_STUDENT);
                 return;
             }
             schoolManager.enrollStudentToCourse(student, course);
-            System.out.println("El estudiante ha sido asignado conexito.");
+            System.out.println(lang.SUCCESS);
         }catch(Exception e){
-            System.out.println("Error al asignar al estudiante: " + e.getMessage());
+            System.out.println(lang.ERROR + e.getMessage());
         }
     }
 
     private void showStudentsInCourse(){
-        System.out.println("Escriba el nombre del curso:");
+        System.out.println(lang.COURSENAME);
         String courseName = scanner.nextLine();
         if(schoolManager.studentCourseMap.containsKey(courseName) == false){
-            System.out.println("El curso que ha escrito no ha sido encontrado, por favor verifique su petición.");
+            System.out.println(lang.COURSE_NOT_FOUND2);
             return;
         }
         for(var entry : schoolManager.studentCourseMap.entrySet()){
-            System.out.println("Curso: " + entry.getKey() + ", Estudiante: " + entry.getValue());
+            System.out.println(lang.COURSE + entry.getKey() + lang.STUDENT + entry.getValue());
         }
     }
 
     private void showTeachersInCourse(){
-        System.out.println("Escribe el nombre del curso:");
+        System.out.println(lang.COURSENAME);
         String courseName = scanner.nextLine();
         if(schoolManager.courseTeacherMap.containsKey(courseName) == false){
-            System.out.println("El curso que ha escrito no ha sido encontrado, por favor verifique su escritura.");
+            System.out.println(lang.COURSE_NOT_FOUND2);
             return;
         }
         for(var entry : schoolManager.courseTeacherMap.entrySet()){
-            System.out.println("Curso: " + entry.getKey() + ", Profesor: " + entry.getValue());
+            System.out.println(lang.COURSE + entry.getKey() + lang.PROFESSOR + entry.getValue());
         }
     }
 
     private void addSubject(){
         try{
-        System.out.println("Ingrese el nombre de la materia:");
+        System.out.println(lang.SUBJECTNAME);
         String name = scanner.nextLine();
         subject.setName(name);
-        System.out.println("Escriba la cantidad de creditos que vale la materia:");
+        System.out.println(lang.CREDITS_M);
         int credits = scanner.nextInt();
         subject.setCredits(credits);
-        System.out.println("Escriba el ID de la materia:");
+        System.out.println(lang.ID);
         String id = scanner.nextLine();
         subject.setID(id);
-        System.out.println("Escriba el curso en el que se alojrá esta materia:");
+        System.out.println(lang.COURSE_TO_SUBJECT);
         String course = scanner.nextLine();
         subject.setCourse(course);
-        System.out.println("Escriba las horas por semana que se dará la clase:");
+        System.out.println(lang.HOURS_M);
         int hours = scanner.nextInt();
         subject.setHours(hours);
 
         schoolManager.enrollSubject(subject);
-        System.out.println("La materia se agregó con exito.");
+        System.out.println(lang.SUCCESS);
         }catch(Exception e){
-            System.out.println("Error al agregar materia: " + e.getMessage());
+            System.out.println(lang.ERROR + e.getMessage());
         }
     }
 
     private void assignSubjectToCourse(){
         try{
-            System.out.println("Escriba el nombre del curso:");
+            System.out.println(lang.COURSENAME);
             String courseName = scanner.nextLine();
             if(schoolManager.courseMap.containsKey(courseName) == false){
-                System.out.println("El nombre del curso no fue econtrado, por favor verifique su escritura.");
+                System.out.println(lang.COURSE_NOT_FOUND);
                 return;
             }
-            System.out.println("Escriba el nombre de la materia:");
+            System.out.println(lang.SUBJECTNAME);;
             String subjectName = scanner.nextLine();
             if(schoolManager.courseMap.containsValue(subjectName) == true){
-                System.out.println("La materia ya esta asignada a este curso.");
+                System.out.println(lang.ALREADY_SUBJECT);
                 return;
             }
             schoolManager.enrollSubjectToCourse(subject, course);
-            System.out.println("La materia fue asignada con exito.");
+            System.out.println(lang.SUCCESS);
         }catch(Exception e){
-            System.out.println("Error al  asignar materia al curso: " + e.getMessage());
+            System.out.println(lang.ERROR + e.getMessage());
         }
     }
 
     private void showSubjectsInTeacher(){
-        System.out.println("Escriba el nombre del maestro:");
+        System.out.println(lang.NAME_PROFESSOR);
         String teacherName = scanner.nextLine();
         if(schoolManager.courseTeacherMap.containsValue(teacherName) == false){
-            System.out.println("El nombre del maestro no ha sido encontrado, por favor verifique su escritura.");
+            System.out.println(lang.PROFESSOR_NOT_FOUND);
             return;
         }
         schoolManager.subjectMap.get(teacherName);
         for(var entry: schoolManager.courseTeacherMap.entrySet()){
-            System.out.println("Maestro: " + entry.getValue() + ", Materia: " + subject.getName());
+            System.out.println(lang.PROFESSOR + entry.getValue() + lang.SUBJECT + subject.getName());
         }
     }
 
     private void assignSubjectToTeacher(){
         try{
-            System.out.println("Escriba el nombre de la materia:");
+            System.out.println(lang.SUBJECTNAME);
             String subjectName =scanner.nextLine();
             if(schoolManager.courseMap.containsValue(subjectName) == false){
-                System.out.println("La materia no ha sido creada; por favor creala primero.");
+                System.out.println(lang.SUBJECT_NOT_FOUND);
                 return;
             }
-            System.out.println("Escriba el nombre del maestro:");
+            System.out.println(lang.NAME_PROFESSOR);
             String teacherName = scanner.nextLine();
             if(schoolManager.teacherMap.containsKey(teacherName) == false){
-                System.out.println("El maestro no ha sido encontrado, primero cree al maestro.");
+                System.out.println(lang.PROFESSOR_NOT_FOUND);
                 return;
             }
             schoolManager.assignSubjectToTeacher(subject, teacher);
-            System.out.println("La materia fue asignada con exito.");
+            System.out.println(lang.SUCCESS);
         }catch(Exception e){
-            System.out.println("Error al asignar materia: " + e.getMessage());
+            System.out.println(lang.ERROR + e.getMessage());
         }
     }
 
@@ -391,9 +390,9 @@ public class CLI {
     }
 
     private void calculateSalary(){
-        System.out.println("Escriba el salario a calcular:");
+        System.out.println(lang.ADD_SALARY);
         double salary = scanner.nextDouble();
-        System.out.println("Escriba la cantidad de materias que llevara:");
+        System.out.println(lang.NUM_M);
         int subject = scanner.nextInt();
         if(subject == 1){
             salary = salary;
@@ -412,7 +411,7 @@ public class CLI {
 
     private void showSubjects(){
         for(Subject subject : schoolManager.subjectMap.keySet()){
-            System.out.println("- " + subject.getName() + ", Creditos: " + subject.getCredits() + ", ID: " + subject.getID() + ", Curso: " + subject.getCourse() + ", Horas: " + subject.getHours() + ", Maestro: " + subject.getTeacher());
+            System.out.println("- " + subject.getName() + lang.CREDITS2 + subject.getCredits() + lang.ID + subject.getID() + lang.COURSE + subject.getCourse() + lang.HOURS + subject.getHours() + lang.PROFESSOR + subject.getTeacher());
         }
     }
 }

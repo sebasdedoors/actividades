@@ -1,6 +1,15 @@
 package poom.actividad4.ui;
 
+    /**
+ * La clase {@code Esp} extiende la clase {@code Lang} y proporciona mensajes en español
+ * para la interfaz de usuario de la aplicación. Inicializa varios mensajes relacionados
+ * con opciones del menú, solicitudes de entrada, errores y confirmaciones.
+ */
 public class Esp extends Lang {
+
+    /**
+     * Constructor de la clase {@code Esp}. Inicializa los mensajes en español.
+     */
 
     public Esp() {
         EXIT = "¡Adiós!";

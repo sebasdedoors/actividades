@@ -1,5 +1,14 @@
 package poom.actividad4.ui;
 
+/**
+ * La clase Lang contiene una serie de cadenas de texto utilizadas para mensajes y etiquetas
+ * dentro de una aplicación, que incluyen mensajes de éxito, error y detalles de cursos, estudiantes,
+ * profesores y asignaturas.
+ * 
+ * Cada variable es un atributo que representa una cadena específica usada en la interfaz del sistema.
+ * Estas cadenas pueden ser usadas para manejar la interacción con el usuario y la validación de datos.
+*/
+
 public class Lang {
 
         protected String EXIT;

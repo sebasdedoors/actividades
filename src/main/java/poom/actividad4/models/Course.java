@@ -13,7 +13,7 @@ public class Course {
     private int credit;
     private Teacher teacher;
     private Student student;
-    private Subject subject;
+    private String subject;
     
     /**
      * @param name Nombre del curso.
@@ -25,7 +25,7 @@ public class Course {
      * @throws IllegalArgumentException Si algún parámetro es inválido.
      */
 
-    public Course(String name, List<Subject> subjects, int credit, Teacher teacher, Student student) {
+    public Course(String name, List<Subject> subject, int credit, Teacher teacher, Student student) {
         setName(name);
         setSubject(subjects);
         setCredit(credit);
@@ -88,11 +88,11 @@ public class Course {
      * @throws IllegalArgumentException Si la lista de materias es nula.
      */
 
-     public void setSubject(List<Subject> subjects){
+     public void setSubject(List<Subject> subject){
         if(subject == null){
             throw new IllegalArgumentException("El tema no puede quedar vacio.");
         }else{
-            subjects.add(subject);
+            this.subjects = subject;
         }
     }
     
@@ -137,5 +137,7 @@ public class Course {
             this.student = student;
         }
     }
+
+    
 
 }

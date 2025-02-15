@@ -140,6 +140,7 @@ public class CLI {
                     break;
                 case 18:
                     System.out.println(lang.EXIT);
+                    System.exit(0);
                     break;
                 default:
                     System.out.println(lang.INVALID);
@@ -148,39 +149,36 @@ public class CLI {
     }
 
     /*addSubject, assignSubjectToCourse, showSubjectsInTeacher, assignSubjectToTeacher, calculateHoursAndCredits, calculateSalary */
-    private static void showStudents(){
-        for(Student student : students){
+    private void showStudents(){
+        Map<Student, List<Student>> stMap = schoolManager.showStudents(); 
+        for(int i = 0; i < stMap.size(); i++){
             System.out.println("- " + student.getName() + ", Edad: " + student.getAge() + ", Curso: " + student.getCourse() + ", Matricula: " + student.getToition() + ".");
         }
     }
 
-    private static void showCourses(){
+    private void showCourses(){
         for(Course course : courseMap.keySet()){
             System.out.println("- " + course.getName() + ", Materias: " + course.getSubject() + ", Creditos: " + course.getCredit());
         }
     }
 
-    private static void showTeachers(){
+    private void showTeachers(){
         for(Teacher teacher : teacherMap.keySet()){
             System.out.println("- " + teacher.getName() + ", Materias impartidas: " + teacher.getSubjects() + ", Salario: " + teacher.getSalary() + ", Nomina: " + teacher.getPayroll());
         }
     }
 
-    private void addStudent(){
+    private void addStudent(){ /*Acua*/
         try{
             System.out.println(lang.NAME);
             String name = scanner.nextLine();
-            student.setName(name);
             System.out.println(lang.AGE);
             int age = scanner.nextInt();
-            student.setAge(age);
             System.out.println(lang.TUITION);
             int tuition = scanner.nextInt();
-            student.setToition(tuition);
             System.out.println(lang.COURSENAME);
             String courseName = scanner.nextLine();
-            student.setCourse(courseName);
-            schoolManager.enrollStudent(student);
+            schoolManager.enrollStudent(name, age, tuition, courseName);
             System.out.println(lang.SUCCESS);
         }catch(Exception e){
             System.out.println(lang.ERROR + e.getMessage());
@@ -191,7 +189,6 @@ public class CLI {
         try{
             System.out.println(lang.COURSENAME);
             String name = scanner.nextLine();
-            course.setName(name);
             System.out.println(lang.NUMSUB);
             int numsub = scanner.nextInt();
             if(numsub < 3){
@@ -204,25 +201,24 @@ public class CLI {
             }
             System.out.println(lang.CREDITS);
             int credit = scanner.nextInt();
-            course.setCredit(credit);
 
             System.out.println(lang.SUCCESS_COURSE);
-            schoolManager.enrollCourse(course);
+            schoolManager.enrollCourse(name, course.getSubject(), credit, course.getTeacher(), course.getStudent());
         }catch(Exception e){
             System.out.println(lang.ERROR_COURSE + e.getMessage());
         }
     }
 
-    private void addTeacher(){
+    private void addTeacher(){ /*Aqui tambien. */
         try{
             System.out.println(lang.NAME_PROFESSOR);
             String name = scanner.nextLine();
-            teacher.setName(name);
             System.out.println(lang.SALARY_PROFESSOR);
             double salary = scanner.nextDouble();
-            teacher.setSalary(salary);
+            System.out.println("Escriba la nomina del maestro:");
+            double payroll = scanner.nextDouble();
 
-            schoolManager.enrollTeacher(teacher);
+            schoolManager.enrollTeacher(name, salary, payroll);
             System.out.println(lang.SUCCESS_PROFESSOR);
         }catch(Exception e){
             System.out.println(lang.ERROR_PROFESSOR + e.getMessage());
@@ -414,6 +410,9 @@ public class CLI {
             System.out.println("- " + subject.getName() + lang.CREDITS2 + subject.getCredits() + lang.ID + subject.getID() + lang.COURSE + subject.getCourse() + lang.HOURS + subject.getHours() + lang.PROFESSOR + subject.getTeacher());
         }
     }
+
+    
+    
 }
 
 

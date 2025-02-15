@@ -42,8 +42,8 @@ public class SchoolManager {
      * @param teacher El profesor a inscribir.
      */
 
-     public static void enrollTeacher(Teacher teacher){
-        teacher = new Teacher(null, 0, 0);
+     public static void enrollTeacher(String name, Double salary, Double payroll){
+        Teacher teacher = new Teacher(name, salary, payroll);
         teacherMap.put(teacher, new ArrayList<>());
     }
 
@@ -52,8 +52,8 @@ public class SchoolManager {
      * @param course El curso a inscribir.
      */
 
-     public static void enrollCourse(Course course){
-        course = new Course(null, subjectList, 0, null, null);
+     public static void enrollCourse(String name, List<Subject> subject, int credit, Teacher teacher, Student student){
+        Course course = new Course(name, subject, credit, teacher, student);
         courseMap.put(course, new ArrayList<>());
     }
 
@@ -63,8 +63,8 @@ public class SchoolManager {
      * @param student El estudiante a inscribir.
      */
 
-     public static void enrollStudent(Student student){
-        student = new Student(null, 0, 0, null);
+     public static void enrollStudent(String name, int age, int tuition, String course){
+        Student student = new Student(name, age, tuition, course);
         studentMap.put(student, new ArrayList<>());
     } 
 
@@ -211,9 +211,9 @@ public class SchoolManager {
             Teacher teacher = entry.getKey();
             List<Subject> subjects = entry.getValue();
 
-            System.out.println("\n Estos son los profesores registrados: " + teacher.getName());
-            for(Subject subject : subjects){
-                System.out.println("- Materia: " + subject.getName() + ", Horas: " + subject.getHours() + ", Créditos: " + subject.getCredits());
+            System.out.println("\n Estos son los profesores registrados: ");
+            for(Teacher teachers : teacherMap.keySet()){
+                System.out.println("- " + "Maestro: " + teacher.getName() + ", Salario: " + teacher.getSalary() + ", Nomina: " + teacher.getPayroll());
             }
         }
     }
@@ -364,6 +364,36 @@ public class SchoolManager {
         System.out.println("- " + subjectCourse.getName());
     }
     return;
-}
+    }
 
+    public static Map<Student, List<Student>> showStudents(){
+        if(studentMap.isEmpty()){
+            System.out.println("No hay alumnos registrados aun.");
+            return studentMap; 
+        }else{
+            for(Map.Entry<Student, List<Student>> entry : studentMap.entrySet()){
+                Student student = entry.getKey();
+                List<Student> students = entry.getValue();
+
+                System.out.println("\n Estos son los alumnos registrados:");
+                for(Student student2 : students){
+                    System.out.println("- " + student.getName() + ", Edad: " + student.getAge() + ", Matricula: " + student.getToition() + ", Curso: " + student.getCourse());
+                }
+            }
+            return studentMap; 
+        }
+    }
+
+    
+    Student student1 = new Student("Juan Perez López", 21,30211001,null);
+    Student student2 = new Student("Clara Fernández Álvarez", 21, 30211002, null);
+    Student student3 = new Student("María González Ramírez", 19, 30211003,null);
+    
+    Subject subject1 = new Subject("POO", 30, "3456", null, 80,null );
+    Subject subject2 = new Subject(null, 0, null, null, 0, null);
+    Subject subject3 = new Subject(null, 0, null, null, 0, null);
+
+    Teacher teacher = new Teacher(null, 0, 0);
+
+    Course course = new Course(null, null, 0, null, null);
 }

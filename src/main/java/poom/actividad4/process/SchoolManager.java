@@ -385,15 +385,5 @@ public class SchoolManager {
     }
 
     
-    Student student1 = new Student("Juan Perez López", 21,30211001,null);
-    Student student2 = new Student("Clara Fernández Álvarez", 21, 30211002, null);
-    Student student3 = new Student("María González Ramírez", 19, 30211003,null);
-    
-    Subject subject1 = new Subject("POO", 30, "3456", null, 80,null );
-    Subject subject2 = new Subject(null, 0, null, null, 0, null);
-    Subject subject3 = new Subject(null, 0, null, null, 0, null);
-
-    Teacher teacher = new Teacher(null, 0, 0);
-
-    Course course = new Course(null, null, 0, null, null);
+   
 }

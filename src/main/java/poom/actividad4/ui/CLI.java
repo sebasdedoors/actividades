@@ -22,7 +22,7 @@ public class CLI {
     private Lang lang;
     private Teacher teacher;
     private Course course;
-    private SchoolManager schoolManager;
+    private static SchoolManager schoolManager;
     private Map<Course, String> courseMap;
     private Map<Teacher, List<Subject>> teacherMap;
     private List<String> subjects;
@@ -149,10 +149,9 @@ public class CLI {
     }
 
     /*addSubject, assignSubjectToCourse, showSubjectsInTeacher, assignSubjectToTeacher, calculateHoursAndCredits, calculateSalary */
-    private void showStudents(){
-        Map<Student, List<Student>> stMap = schoolManager.showStudents(); 
-        for(int i = 0; i < stMap.size(); i++){
-            System.out.println("- " + student.getName() + ", Edad: " + student.getAge() + ", Curso: " + student.getCourse() + ", Matricula: " + student.getToition() + ".");
+    private static void showStudents(){
+        for(var entry : schoolManager.studentMap.entrySet()){
+            System.out.println("Estudiantes " + entry.getKey());
         }
     }
 
@@ -412,7 +411,7 @@ public class CLI {
     }
 
     
-    
+
 }
 
 

@@ -73,8 +73,8 @@ public class SchoolManager {
      * @param subject La materia a inscribir.
      */
 
-     public static void enrollSubject(Subject subject){
-        subject = new Subject(null, 0, null, null, 0, null);
+     public static void enrollSubject(String name, int credit, String id, String course, int hours, Teacher teacher){
+        Subject subject = new Subject(name, credit, id, course, hours, teacher);
         subjectMap.put(subject, new ArrayList<>());
     }
 

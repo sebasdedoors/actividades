@@ -32,6 +32,7 @@ public class CLI {
         scanner = new Scanner(System.in);
         schoolManager = new SchoolManager();
         selectLanguage();
+        this.teacherMap = new HashMap<>();
     }   
     
     public CLI(Lang lang){
@@ -304,21 +305,16 @@ public class CLI {
         try{
         System.out.println(lang.SUBJECTNAME);
         String name = scanner.nextLine();
-        subject.setName(name);
         System.out.println(lang.CREDITS_M);
         int credits = scanner.nextInt();
-        subject.setCredits(credits);
         System.out.println(lang.ID);
         String id = scanner.nextLine();
-        subject.setID(id);
         System.out.println(lang.COURSE_TO_SUBJECT);
         String course = scanner.nextLine();
-        subject.setCourse(course);
         System.out.println(lang.HOURS_M);
         int hours = scanner.nextInt();
-        subject.setHours(hours);
 
-        schoolManager.enrollSubject(subject);
+        schoolManager.enrollSubject(name, credits, id, course, hours, teacher);
         System.out.println(lang.SUCCESS);
         }catch(Exception e){
             System.out.println(lang.ERROR + e.getMessage());
